@@ -1,0 +1,22 @@
+{
+    "name": "Product B",
+    "type": "Type 2",
+    "price": 200,
+    "quantity": 5,
+    "barcode": "456",
+    "supplier": "Supplier Y",
+    "warehouse": "Warehouse 2",
+    "image": "url_to_image_2",
+    "stocks": [
+      {
+        "id": 20,
+        "name": "",
+        "quantity": 15,
+        "locations": {
+          "city": "Casablanca",
+          "latitude": 33,
+          "longitude": 7
+        }
+      }
+    ]
+  }
