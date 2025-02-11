@@ -1,78 +1,134 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Animated } from 'react-native';
+import LottieView from 'lottie-react-native';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
-const LandingScreen = () => {
+export default function LandingPage() {
+  const router = useRouter();
+  const fadeAnim = new Animated.Value(0);
 
-
-
-  const router = useRouter()
+  Animated.timing(fadeAnim, {
+    toValue: 1,
+    duration: 1000,
+    useNativeDriver: true,
+  }).start();
 
   return (
-    
-    <LinearGradient colors={['#6366f1', '#4338ca']} style={styles.container}>
+    <LinearGradient
+      colors={['#1a237e', '#0d47a1']}
+      style={styles.container}
+    >
       <View style={styles.header}>
-        <Ionicons name="cube" size={120} color="white" />
-        <Text style={styles.title}>StockMaster</Text>
-        <Text style={styles.subtitle}>Smart Inventory Management</Text>
+        <MaterialIcons name="warehouse" size={40} color="#fff" />
+        <Text style={styles.logoText}>StockMaster</Text>
       </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => router.push('/login')}
-        >
-          <Text style={styles.buttonText}>Get Started</Text>
-          <Ionicons name="arrow-forward" size={24} color="white" />
-        </TouchableOpacity>
+
+      <View style={styles.content}>
+        <Animated.View style={{ opacity: fadeAnim }}>
+          <Text style={styles.title}>Smart Warehouse Management</Text>
+          <Text style={styles.subtitle}>
+            Optimize your inventory with real-time tracking and AI-powered insights
+          </Text>
+        </Animated.View>
+
+        <View style={styles.buttonGroup}>
+          <TouchableOpacity 
+            style={styles.primaryButton}
+            onPress={() => router.push('/login')}
+          >
+            <AntDesign name="lock" size={20} color="white" />
+            <Text style={styles.buttonText}>Get Started</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.secondaryButton}
+            onPress={() => router.push('/register')}
+          >
+            <Text style={styles.secondaryButtonText}>Create Account</Text>
+            <AntDesign name="arrowright" size={20} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
     </LinearGradient>
-    
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 20,
   },
   header: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 100,
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  logoText: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginLeft: 10,
+  },
+  animationContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  animation: {
+    width: 300,
+    height: 300,
+  },
+  content: {
+    paddingBottom: 40,
   },
   title: {
-    fontSize: 36,
-    color: 'white',
+    color: '#fff',
+    fontSize: 32,
     fontWeight: 'bold',
-    marginTop: 20,
+    textAlign: 'center',
+    marginBottom: 15,
   },
   subtitle: {
-    fontSize: 18,
-    color: '#e0e7ff',
-    marginTop: 10,
+    color: 'rgba(255,255,255,0.8)',
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 40,
+    lineHeight: 24,
   },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 50,
-    width: '80%',
+  buttonGroup: {
+    gap: 15,
   },
-  button: {
-    backgroundColor: '#4f46e5',
-    padding: 20,
-    borderRadius: 15,
+  primaryButton: {
+    backgroundColor: '#00e676',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    elevation: 5,
+    justifyContent: 'center',
+    padding: 18,
+    borderRadius: 15,
+    gap: 10,
+    elevation: 3,
+  },
+  secondaryButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.3)',
+    gap: 10,
   },
   buttonText: {
-    color: 'white',
+    color: '#fff',
     fontSize: 18,
     fontWeight: '600',
   },
+  secondaryButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '500',
+  },
 });
-
-export default LandingScreen;
