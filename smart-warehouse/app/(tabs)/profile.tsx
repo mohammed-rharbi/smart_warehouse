@@ -1,0 +1,240 @@
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAuth } from '@/context/authContext';
+import { router } from 'expo-router';
+
+
+export default function ProfileScreen() {
+
+
+    const {user} = useAuth()
+    
+    const { logout } = useAuth()
+
+    const signout = async ()=>{
+
+        await logout()
+    }
+
+       
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollContainer}>
+
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.backButton} onPress={()=> router.back()}>
+            <Ionicons name="arrow-back" size={24} color="#fff" />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Profile</Text>
+          <TouchableOpacity style={styles.editButton}>
+            <MaterialCommunityIcons name="pencil" size={24} color="#4CAF50" />
+          </TouchableOpacity>
+        </View>
+
+
+        <View style={styles.profileSection}>
+          <Image 
+            source={{uri:'https://i.pinimg.com/736x/a9/5a/07/a95a078af138e7c59aeb4847d33e3e1c.jpg'}}
+            style={styles.avatar}
+          />
+          <Text style={styles.userName}>{user?.name}</Text>
+          <Text style={styles.userRole}>Warehouse Manager</Text>
+          
+          <View style={styles.statsRow}>
+            <View style={styles.profileStat}>
+              <Text style={styles.statNumber}>2.5k</Text>
+              <Text style={styles.statLabel}>Items Managed</Text>
+            </View>
+            <View style={styles.profileStat}>
+              <Text style={styles.statNumber}>98%</Text>
+              <Text style={styles.statLabel}>Accuracy</Text>
+            </View>
+            <View style={styles.profileStat}>
+              <Text style={styles.statNumber}>5y</Text>
+              <Text style={styles.statLabel}>Experience</Text>
+            </View>
+          </View>
+        </View>
+
+
+        <Text style={styles.sectionTitle}>Account Settings</Text>
+        <View style={styles.settingsContainer}>
+          <TouchableOpacity style={styles.settingItem}>
+            <MaterialCommunityIcons name="cog" size={24} color="#4CAF50" />
+            <Text style={styles.settingText}>General Settings</Text>
+            <Ionicons name="chevron-forward" size={20} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.settingItem}>
+            <MaterialCommunityIcons name="shield-lock" size={24} color="#2196F3" />
+            <Text style={styles.settingText}>Security</Text>
+            <Ionicons name="chevron-forward" size={20} color="#666" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.settingItem}>
+            <MaterialCommunityIcons name="bell" size={24} color="#FF9800" />
+            <Text style={styles.settingText}>Notifications</Text>
+            <Ionicons name="chevron-forward" size={20} color="#666" />
+          </TouchableOpacity>
+        </View>
+
+
+        <Text style={styles.sectionTitle}>Personal Information</Text>
+        <View style={styles.infoContainer}>
+          <View style={styles.infoItem}>
+            <Text style={styles.infoLabel}>City</Text>
+            <Text style={styles.infoValue}>{user?.city}</Text>
+          </View>
+          
+          <View style={styles.infoItem}>
+            <Text style={styles.infoLabel}>Date Of Birth</Text>
+            <Text style={styles.infoValue}>{user?.dob}</Text>
+          </View>
+          
+          <View style={styles.infoItem}>
+            <Text style={styles.infoLabel}>Joined Date</Text>
+            <Text style={styles.infoValue}>15 Jan 2020</Text>
+          </View>
+        </View>
+
+
+        <TouchableOpacity style={styles.logoutButton} onPress={signout}>
+          <MaterialCommunityIcons name="logout" size={24} color="#F44336" />
+          <Text style={styles.logoutText}>Log Out</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1A1A1A',
+  },
+  scrollContainer: {
+    padding: 20,
+    
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  backButton: {
+    padding: 8,
+  },
+  headerTitle: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  editButton: {
+    padding: 8,
+  },
+  profileSection: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  avatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 15,
+  },
+  userName: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  userRole: {
+    color: '#888',
+    fontSize: 16,
+    marginBottom: 20,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  profileStat: {
+    alignItems: 'center',
+    backgroundColor: '#2D2D2D',
+    padding: 15,
+    borderRadius: 15,
+    width: '30%',
+  },
+  statNumber: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  statLabel: {
+    color: '#888',
+    fontSize: 12,
+  },
+  sectionTitle: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    marginTop: 10,
+  },
+  settingsContainer: {
+    backgroundColor: '#2D2D2D',
+    borderRadius: 15,
+    padding: 15,
+  },
+  settingItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#333',
+  },
+  settingText: {
+    color: '#fff',
+    flex: 1,
+    marginLeft: 15,
+    fontSize: 16,
+  },
+  infoContainer: {
+    backgroundColor: '#2D2D2D',
+    borderRadius: 15,
+    padding: 20,
+  },
+  infoItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 15,
+  },
+  infoLabel: {
+    color: '#888',
+    fontSize: 14,
+  },
+  infoValue: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  logoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#2D2D2D',
+    padding: 15,
+    borderRadius: 15,
+    marginTop: 30,
+    marginBottom: 20,
+  },
+  logoutText: {
+    color: '#F44336',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 10,
+  },
+});
