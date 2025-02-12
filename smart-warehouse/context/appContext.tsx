@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login } from "@/services/auth";
 import { useRouter } from "expo-router";
 import { Product } from "@/lib/types";
-import { fetchProduct , fetchSinglProduct } from "@/services/products";
+import { fetchProduct , fetchSinglProduct , create } from "@/services/products";
 
 type AppContextType = {
 
@@ -11,6 +11,7 @@ type AppContextType = {
   products: Product | null;
   getProducts: ()=> {};
   getOneProducts: (id:string)=> Promise<Product>;
+  createProduct: (data:Product)=> Promise<Product>;
 
 };
 
@@ -53,6 +54,20 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
     }
   };
 
+  const createProduct = async (data: Product)=>{
+
+    try{
+
+        const res = await create(data);
+
+        return res
+
+    }catch(error){
+        console.error("Login failed:", error);
+    }
+
+  }
+
   useEffect(()=>{
 
     getProducts()
@@ -61,7 +76,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
 
   return (
-    <AppContext.Provider value={{ isLoading , products , getProducts , getOneProducts }}>
+    <AppContext.Provider value={{ isLoading , products , getProducts , getOneProducts , createProduct }}>
       {children}
     </AppContext.Provider>
   );
