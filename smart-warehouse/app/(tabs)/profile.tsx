@@ -36,7 +36,7 @@ export default function ProfileScreen() {
 
         <View style={styles.profileSection}>
           <Image 
-            source={{uri:'https://i.pinimg.com/736x/a9/5a/07/a95a078af138e7c59aeb4847d33e3e1c.jpg'}}
+            source={{uri:'https://i.pinimg.com/474x/70/df/6f/70df6f4386e469e65cc8e540cda79899.jpg'}}
             style={styles.avatar}
           />
           <Text style={styles.userName}>{user?.name}</Text>
@@ -95,7 +95,7 @@ export default function ProfileScreen() {
           
           <View style={styles.infoItem}>
             <Text style={styles.infoLabel}>Joined Date</Text>
-            <Text style={styles.infoValue}>15 Jan 2020</Text>
+            <Text style={styles.infoValue}>{user?.joindDate}</Text>
           </View>
         </View>
 
