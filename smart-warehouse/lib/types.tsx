@@ -10,6 +10,8 @@ export interface User{
     city:string,
     secretKey:string,
     warehouseId:string
+    joindDate: string
+
 }
 
 
