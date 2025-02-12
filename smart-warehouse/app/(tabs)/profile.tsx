@@ -19,6 +19,7 @@ export default function ProfileScreen() {
 
        
   return (
+    
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
 
