@@ -48,7 +48,32 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
+        }}
+      />
+       <Tabs.Screen
+        name="products"
+        options={{
+          href:null
+        }}
+      />
+       <Tabs.Screen
+        name="createProduct"
+        options={{
+          href:null
+        }}
+      />
+       <Tabs.Screen
+        name="ProductDetails"
+        options={{
+          href:null
+        }}
+      />
+
+      <Tabs.Screen
+        name="barcodeScanner"
+        options={{
+          href:null
         }}
       />
     </Tabs>
