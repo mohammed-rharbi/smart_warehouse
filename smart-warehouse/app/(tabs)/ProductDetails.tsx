@@ -9,6 +9,7 @@ const ProductDetailsPage = () => {
   const { id } = useLocalSearchParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+
   const { getOneProducts } = useAPP();
 
   useEffect(() => {
@@ -76,7 +77,7 @@ const ProductDetailsPage = () => {
           <Feather name="box" size={20} color="#A0A0A0" />
         </View>
 
-        {product.stocks.map((stock) => (
+        { product ? product.stocks.map((stock) => (
           <View key={stock.id} style={styles.stockItem}>
             <Text style={styles.stockName}>{stock.name}</Text>
             <View style={styles.stockInfoRow}>
@@ -88,7 +89,13 @@ const ProductDetailsPage = () => {
               <Text style={styles.stockText}>{stock.localisation.city}</Text>
             </View>
           </View>
-        ))}
+        )) : 
+
+        <View style={styles.stockInfoRow}>
+        <Text style={styles.stockText}>No product details yeet</Text>
+       </View>
+        
+        }
       </View>
     </ScrollView>
   );
