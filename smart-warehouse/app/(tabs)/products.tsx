@@ -21,7 +21,6 @@ const ProductsPage = () => {
     );
   }
 
- 
   const ProductCard = ({ item }: any) => (
     <TouchableOpacity
       style={styles.card}
@@ -67,8 +66,7 @@ const ProductsPage = () => {
               styles.filterChip,
               selectedCategory === item && styles.selectedFilterChip
             ]}
-            onPress={() => setSelectedCategory(item)}
-          >
+            onPress={() => setSelectedCategory(item)}>
             <Text style={[
               styles.filterText,
               selectedCategory === item && styles.selectedFilterText
@@ -101,6 +99,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121212',
+    marginTop:33,
+
   },
   loadingContainer: {
     flex: 1,
