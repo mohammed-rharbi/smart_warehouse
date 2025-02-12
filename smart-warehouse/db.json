@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Laptop HP Pavilion",
       "type": "Informatique",
       "barcode": "1234567890123",
@@ -39,7 +39,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Clavier Mécanique Logitech",
       "type": "Accessoires",
       "barcode": "9876543210987",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Pc Gamer Omen By HP",
       "type": "Informatique",
       "barcode": "1236543210987",
@@ -90,24 +90,60 @@
           "at": "2025-02-02"
         }
       ]
+    },
+    {
+      "id": "af24",
+      "name": "Quia ab quis aliquam",
+      "type": "Molestias magnam nec",
+      "supplier": "Eiusmod sapiente et ",
+      "sold": "2331",
+      "price": "2001",
+      "image": "https://i.pinimg.com/736x/b1/84/2a/b1842ae36d3b969a823b45c59a620db1.jpg",
+      "barcode": "1100986543214",
+      "stocks": [],
+      "editedBy": [
+        {
+          "warehousemanId": 1333,
+          "at": "2025-02-12T10:30:30.329Z"
+        }
+      ]
+    },
+    {
+      "id": "64aa",
+      "name": "Nivea men",
+      "type": "Beauty ",
+      "supplier": "Nivea ",
+      "sold": "85",
+      "price": "80",
+      "image": "https://i.pinimg.com/474x/34/d2/9b/34d29b098891f48bdf6ec12603947970.jpg",
+      "barcode": "42355182",
+      "stocks": [],
+      "editedBy": [ 
+        {
+          "warehousemanId": "1333",
+          "at": "2025-02-12T16:12:54.672Z"
+        }
+      ]
     }
   ],
   "warehousemans": [
     {
-      "id": 1333,
+      "id": "1333",
       "name": "Amine Boutaleb",
       "dob": "1988-05-02",
       "city": "Oujda",
       "secretKey": "332001",
-      "warehouseId": 1999
+      "warehouseId": 1999,
+      "joindDate": "15 Jan 2020"
     },
     {
-      "id": 1444,
+      "id": "1444",
       "name": "Karim El Mansouri",
       "dob": "1990-09-15",
       "city": "Marrakesh",
       "secretKey": "200133",
-      "warehouseId": 2991
+      "warehouseId": 2991,
+      "joindDate": "12 Mar 2024"
     }
   ],
   "statistics": {
