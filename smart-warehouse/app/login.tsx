@@ -27,6 +27,7 @@ export default function LoginPage() {
     }
 
     try {
+      
       await loginUser(code)
 
     } catch (err) {
