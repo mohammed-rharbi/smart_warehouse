@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity , SafeAreaView} fr
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { useAuth } from '@/context/authContext';
+import { router } from 'expo-router';
 
 export default function HomeScreen() {
 
@@ -41,12 +42,12 @@ export default function HomeScreen() {
 
         <Text style={styles.sectionTitle}>Quick Actions</Text>
         <View style={styles.actionsRow}>
-          <TouchableOpacity style={styles.actionCard}>
+          <TouchableOpacity style={styles.actionCard} onPress={()=> router.push('/createProduct')}>
             <MaterialCommunityIcons name="plus-box" size={32} color="#4CAF50" />
             <Text style={styles.actionText}>Add Item</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionCard}>
+          <TouchableOpacity style={styles.actionCard} onPress={()=> router.push('/products')}>  
             <MaterialCommunityIcons name="package" size={32} color="#2196F3" />
             <Text style={styles.actionText}>Manage Products</Text>
           </TouchableOpacity>
@@ -56,7 +57,7 @@ export default function HomeScreen() {
             <Text style={styles.actionText}>Analytics</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionCard}>
+          <TouchableOpacity style={styles.actionCard} onPress={()=> router.push('/barcodeScanner')}>
             <MaterialCommunityIcons name="barcode-scan" size={32} color="#9C27B0" />
             <Text style={styles.actionText}>Scan Item</Text>
           </TouchableOpacity>
