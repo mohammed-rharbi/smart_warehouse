@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity , SafeAreaView} fr
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { useAuth } from '@/context/authContext';
+import { router } from 'expo-router';
 
 export default function HomeScreen() {
 
@@ -46,7 +47,7 @@ export default function HomeScreen() {
             <Text style={styles.actionText}>Add Item</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionCard}>
+          <TouchableOpacity style={styles.actionCard} onPress={()=> router.push('/products')}>
             <MaterialCommunityIcons name="package" size={32} color="#2196F3" />
             <Text style={styles.actionText}>Manage Products</Text>
           </TouchableOpacity>
