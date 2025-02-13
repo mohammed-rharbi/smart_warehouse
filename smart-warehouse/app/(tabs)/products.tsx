@@ -9,9 +9,7 @@ const ProductsPage = () => {
   const { products, isLoading } = useAPP();
   
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
   
-  const categories = ['all', 'electronics', 'clothing', 'furniture', 'on sale'];
 
   if (isLoading) {
     return (
@@ -22,6 +20,7 @@ const ProductsPage = () => {
   }
 
   const ProductCard = ({ item }: any) => (
+    
     <TouchableOpacity
       style={styles.card}
       onPress={() => router.push(`/ProductDetails?id=${item.id}`)}
@@ -33,7 +32,8 @@ const ProductsPage = () => {
         
         <View style={styles.priceRow}>
           <Text style={styles.price}>${item.price}</Text>
-          {/* {item.solde && <Text style={styles.oldPrice}>${item.solde}</Text>} */}
+          <Text style={styles.solde}>${item.solde}</Text>
+
         </View>
         <InfoRow icon="tag" text={item.type} />
         <InfoRow icon="truck" text={item.supplier} />
@@ -42,6 +42,7 @@ const ProductsPage = () => {
   );
 
   return (
+
     <View style={styles.container}>
       <View style={styles.searchContainer}>
 
@@ -55,35 +56,12 @@ const ProductsPage = () => {
         />
       </View>
 
-      <FlatList
-        data={categories}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.filterContainer}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={[
-              styles.filterChip,
-              selectedCategory === item && styles.selectedFilterChip
-            ]}
-            onPress={() => setSelectedCategory(item)}>
-            <Text style={[
-              styles.filterText,
-              selectedCategory === item && styles.selectedFilterText
-            ]}>
-              {item}
-            </Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={item => item}
-      />
 
       <FlatList
         data={products}
         renderItem={({ item }) => <ProductCard item={item} />}
         keyExtractor={item => item.id.toString()}
-        contentContainerStyle={styles.list}
-      />
+        contentContainerStyle={styles.list}/>
     </View>
   );
 };
@@ -130,8 +108,8 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     paddingHorizontal: 16,
-    paddingBottom: 8,
-  },
+
+},
   filterChip: {
     backgroundColor: '#2D2D2D',
     borderRadius: 20,
@@ -183,6 +161,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   price: {
+    fontSize: 16,
+    color: '#4CAF50',
+    fontWeight: '800',
+  },
+  solde: {
     fontSize: 16,
     color: '#4CAF50',
     fontWeight: '800',

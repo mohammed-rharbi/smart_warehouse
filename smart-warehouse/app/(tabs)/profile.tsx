@@ -36,7 +36,7 @@ export default function ProfileScreen() {
 
         <View style={styles.profileSection}>
           <Image 
-            source={{uri:'https://i.pinimg.com/474x/70/df/6f/70df6f4386e469e65cc8e540cda79899.jpg'}}
+            source={{uri: user?.image}}
             style={styles.avatar}
           />
           <Text style={styles.userName}>{user?.name}</Text>

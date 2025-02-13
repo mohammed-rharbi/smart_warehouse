@@ -76,6 +76,13 @@ export default function TabLayout() {
           href:null
         }}
       />
+  
+      <Tabs.Screen
+        name="addStock"
+        options={{
+          href:null
+        }}
+      />
     </Tabs>
   );
 }

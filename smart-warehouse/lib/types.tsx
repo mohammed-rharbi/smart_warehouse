@@ -9,8 +9,9 @@ export interface User{
     dob:string,
     city:string,
     secretKey:string,
-    warehouseId:string
-    joindDate: string
+    warehouseId:string,
+    joindDate: string,
+    image:string
 
 }
 
@@ -39,3 +40,15 @@ export interface Product{
     ],
     editedBy:[]
 }
+
+export interface Stock{
+
+            id:number,
+            name:string,
+            quantity:string,
+            localisation:{
+                city:string ,
+                latitude: string ,
+                longitude: string },
+
+    }

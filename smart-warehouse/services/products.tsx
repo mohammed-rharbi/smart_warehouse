@@ -1,5 +1,5 @@
 import apiClient from "@/lib/apiClient";
-import { Product } from "@/lib/types";
+import { Product , Stock} from "@/lib/types";
 
 
 
@@ -80,3 +80,29 @@ export const getProductByBarcode = async (code : string)=>{
         throw new Error(' error while fetching the product');
     }
 }
+
+
+
+export const addStock = async (newStock: Stock, id: string) => {
+    try {
+        const pres = await apiClient.get(`products/${id}`);
+        const product = pres.data;
+
+
+        if (!product.stocks) product.stocks = [];
+
+
+        product.stocks.push(newStock);
+
+
+        const response = await apiClient.patch(`products/${id}`, product);
+        return response.data;
+
+    } catch (error) {
+        throw new Error('Error while fetching the product');
+    }
+}
+
+
+
+

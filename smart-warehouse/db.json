@@ -135,11 +135,49 @@
       "solde": "330",
       "image": "https://i.pinimg.com/736x/5f/d0/88/5fd08819bf2ea01978b809a4d426a7aa.jpg",
       "sold": "330",
-      "stocks": [],
+      "stocks": [
+        {
+          "id": 2759,
+          "name": "Mathew ",
+          "quantity": "32",
+          "localisation": {
+            "city": "Safi",
+            "latitude": "567",
+            "longitude": "765"
+          }
+        },
+        {
+          "id": 8673,
+          "name": "Masira",
+          "quantity": "9",
+          "localisation": {
+            "city": "Safi",
+            "latitude": "1029",
+            "longitude": "1345"
+          }
+        }
+      ],
       "editedBy": [
         {
           "warehousemanId": "1333",
           "at": "2025-02-12T22:33:36.465Z"
+        }
+      ]
+    },
+    {
+      "id": "a600",
+      "name": "book",
+      "type": "books",
+      "supplier": "dar al kotob",
+      "sold": "40",
+      "price": "30",
+      "image": "https://i.pinimg.com/474x/43/75/b7/4375b7d9bf24b88aa53744b417227485.jpg",
+      "barcode": "1984",
+      "stocks": [],
+      "editedBy": [
+        {
+          "warehousemanId": "1444",
+          "at": "2025-02-13T15:29:50.292Z"
         }
       ]
     }
@@ -152,6 +190,7 @@
       "city": "Oujda",
       "secretKey": "332001",
       "warehouseId": 1999,
+      "image": "https://i.pinimg.com/474x/70/df/6f/70df6f4386e469e65cc8e540cda79899.jpg",
       "joindDate": "15 Jan 2020"
     },
     {
@@ -161,6 +200,7 @@
       "city": "Marrakesh",
       "secretKey": "200133",
       "warehouseId": 2991,
+      "image": "https://i.pinimg.com/474x/be/c1/2f/bec12fcfbb56f53213fe07460497edc3.jpg",
       "joindDate": "12 Mar 2024"
     }
   ],
