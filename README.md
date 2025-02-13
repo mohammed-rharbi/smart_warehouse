@@ -2,9 +2,8 @@
 
 ![Smart Warehouse Banner](https://via.placeholder.com/800x200.png?text=Smart+Warehouse+-+Next-Gen+Inventory+Management) <!-- Replace with actual banner -->
 
-A modern inventory management solution powered by mobile technology. Streamline warehouse operations with real-time tracking, barcode scanning, and intelligent stock management.
+An intuitive mobile application to simplify in-store inventory management. It enables warehouse staff to add, remove and track products in real time via barcode scanner or manual entry
 
-[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Expo Version](https://img.shields.io/badge/expo-%5E49.0.0-brightgreen)](https://expo.io/)
 [![React Native Version](https://img.shields.io/badge/react%20native-%5E0.72.4-blue)](https://reactnative.dev/)
 
@@ -12,8 +11,7 @@ A modern inventory management solution powered by mobile technology. Streamline 
 
 - 📸 **Barcode Scanner Integration** - Instant product lookup and registration
 - 📊 **Real-time Inventory Tracking** - Live stock level monitoring
-- 👥 **Role-based Access Control** - Multi-level user permissions
-- 📈 **Advanced Reporting** - Generate stock movement reports
+- 📈 **Advanced Reporting** - Generate stock reports
 - 🔍 **Product Search** - Instant search with multiple filters
 - 📦 **Batch Management** - Track product batches and expiration dates
 - 📱 **Mobile-first Design** - Optimized for warehouse tablet use
@@ -28,16 +26,16 @@ A modern inventory management solution powered by mobile technology. Streamline 
 [![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 **Navigation**  
-[![React Navigation](https://img.shields.io/badge/-React%20Navigation-6B52AE)](https://reactnavigation.org/)
+[![React Router](https://img.shields.io/badge/-React%20Navigation-6B52AE)](https://reactnavigation.org/)
 
 **UI Framework**  
 [![React Native Paper](https://img.shields.io/badge/-React%20Native%20Paper-2089DC)](https://reactnativepaper.com/)
 
 **State Management**  
-[![Zustand](https://img.shields.io/badge/-Zustand-764ABC)](https://zustand-demo.pmnd.rs/)
+[![Context API](https://img.shields.io/badge/-Context%20API-61DAFB?logo=react&logoColor=white)](https://reactjs.org/docs/context.html)
 
 **Backend**  
-[![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![JSON Server](https://img.shields.io/badge/-JSON%20Server-000000?logo=json&logoColor=white)](https://github.com/typicode/json-server)
 
 ## ⚙️ Installation
 
@@ -60,8 +58,4 @@ A modern inventory management solution powered by mobile technology. Streamline 
 
  5. **Run Application**
     ```bash
-    npx expo start
-
-    
-
-   
+    npx expo start   
