@@ -1,6 +1,6 @@
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity , ActivityIndicator } from 'react-native';
 import { useAPP } from '@/context/appContext';
 import { Product } from '@/lib/types';
 import { Feather } from '@expo/vector-icons';
@@ -9,6 +9,7 @@ const ProductDetailsPage = () => {
   const { id } = useLocalSearchParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+  const [stockColor ,setStockColor ] = useState('blue')
 
   const { getOneProducts } = useAPP();
 
@@ -45,26 +46,30 @@ const ProductDetailsPage = () => {
     );
   }
 
+  const getQuantityColor = (quantity:any) => {
+    if (quantity < 5) {
+      return 'red'; 
+    } else if (quantity < 10) {
+      return 'yellow'; 
+    } else {
+      return 'green';
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: product.image }} style={styles.productImage} />
-        {product.solde && (
-          <View style={styles.saleBadge}>
-            <Text style={styles.saleText}>SALE</Text>
-          </View>
-        )}
       </View>
 
       <View style={styles.productDetails}>
         <Text style={styles.productName}>{product.name}</Text>
         
         <View style={styles.priceContainer}>
-          <Text style={styles.productPrice}>${product.price}</Text>
+          <Text style={styles.productPrice}>Price : ${product.price}</Text>
+          <Text style={styles.productPrice}>_</Text>
+          <Text style={styles.productSolde}>Sale Price : ${product.solde}</Text>
 
-          {product.solde && (
-            <Text style={styles.productSolde}>${product.solde}</Text>
-          )}
         </View>
 
         <View style={styles.infoRow}>
@@ -77,25 +82,39 @@ const ProductDetailsPage = () => {
           <Feather name="box" size={20} color="#A0A0A0" />
         </View>
 
-        { product ? product.stocks.map((stock) => (
-          <View key={stock.id} style={styles.stockItem}>
-            <Text style={styles.stockName}>{stock.name}</Text>
-            <View style={styles.stockInfoRow}>
-              <Feather name="database" size={14} color="#4CAF50" />
-              <Text style={styles.stockText}>Quantity: {stock.quantity}</Text>
-            </View>
-            <View style={styles.stockInfoRow}>
-              <Feather name="map-pin" size={14} color="#4CAF50" />
-              <Text style={styles.stockText}>{stock.localisation.city}</Text>
-            </View>
-          </View>
-        )) : 
+            {product.stocks?.length === 0 ? (
 
-        <View style={styles.stockInfoRow}>
-        <Text style={styles.stockText}>No product details yeet</Text>
-       </View>
-        
-        }
+            <View style={{ marginTop: 20, alignItems: 'center' }}>
+                <Text style={styles.stockText}>No stock available</Text>
+            </View>
+            ) : (
+            product.stocks.map((stock) => (
+                
+                
+                <View key={stock.id} style={styles.stockItem}>
+                <View style={styles.sectionHeader}>
+                <Text style={styles.stockName}>{stock.name}</Text>
+                <Feather name="disc" size={20} color={getQuantityColor(stock.quantity)} />
+                </View>
+                <View style={styles.stockInfoRow}>
+                    <Feather name="database" size={14} color="#4CAF50" />
+                    <Text style={styles.stockText}>Quantity: {stock.quantity}</Text>
+                </View>
+                <View style={styles.stockInfoRow}>
+                    <Feather name="map-pin" size={14} color="#4CAF50" />
+                    <Text style={styles.stockText}>{stock.localisation.city}</Text>
+                </View>
+                </View>
+            ))
+            )}
+
+          
+                <View style={{ marginTop: 20, alignItems: 'center' }}>
+                <TouchableOpacity style={styles.addButton} onPress={()=> router.push(`/addStock?id=${product.id}`)} >
+                <Text style={styles.addButtonText}>Add Stock</Text>
+                </TouchableOpacity>               
+                </View>
+
       </View>
     </ScrollView>
   );
@@ -153,10 +172,11 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   productSolde: {
-    fontSize: 18,
+
     color: '#757575',
-    textDecorationLine: 'line-through',
-  },
+    fontSize: 20,
+    fontWeight: '800',
+},
   infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -205,20 +225,19 @@ const styles = StyleSheet.create({
     color: '#A0A0A0',
     fontSize: 14,
   },
-  saleBadge: {
-    position: 'absolute',
-    top: 32,
-    right: 32,
-    backgroundColor: '#FF5252',
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 20,
+
+  addButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    marginTop: 10,
   },
-  saleText: {
+  addButtonText: {
     color: '#FFFFFF',
+    fontSize: 16,
     fontWeight: 'bold',
-    fontSize: 12,
-  },
+  }
 });
 
 export default ProductDetailsPage;
