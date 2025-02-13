@@ -118,10 +118,28 @@
       "image": "https://i.pinimg.com/474x/34/d2/9b/34d29b098891f48bdf6ec12603947970.jpg",
       "barcode": "42355182",
       "stocks": [],
-      "editedBy": [ 
+      "editedBy": [
         {
           "warehousemanId": "1333",
           "at": "2025-02-12T16:12:54.672Z"
+        }
+      ]
+    },
+    {
+      "id": "b970",
+      "name": "The witcher wild hunt ",
+      "type": "Games",
+      "barcode": "3391891989886",
+      "supplier": "Cd project red",
+      "price": 300,
+      "solde": "330",
+      "image": "https://i.pinimg.com/736x/5f/d0/88/5fd08819bf2ea01978b809a4d426a7aa.jpg",
+      "sold": "330",
+      "stocks": [],
+      "editedBy": [
+        {
+          "warehousemanId": "1333",
+          "at": "2025-02-12T22:33:36.465Z"
         }
       ]
     }

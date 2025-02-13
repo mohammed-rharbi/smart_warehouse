@@ -36,5 +36,6 @@ export interface Product{
                 longitude: string },
 
         }
-    ]
+    ],
+    editedBy:[]
 }

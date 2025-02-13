@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, StyleSheet, Text } from 'react-native';
-import { Button, TextInput, HelperText } from 'react-native-paper';
+import { Button, TextInput,Card , useTheme , Title, HelperText } from 'react-native-paper';
 import { useAPP } from '@/context/appContext';
 import { useAuth } from '@/context/authContext';
 import { router, useLocalSearchParams } from 'expo-router';
+
+
+type FormErrors = {
+    name?: string;
+    type?: string;
+    barcode?: string;
+    supplier?: string;
+    price?: string;
+    solde?: string;
+    image?: string;
+  };
+  
 
 const CreateProductPage = () => {
 
 
   const {Bcode} = useLocalSearchParams()
 
-
+  const theme = useTheme();
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [barcode, setBarcode] = useState(Bcode);
@@ -18,14 +30,15 @@ const CreateProductPage = () => {
   const [price, setPrice] = useState('');
   const [solde, setSolde] = useState('');
   const [image, setImage] = useState(null);
-  const [errors, setErrors] = useState({});
+
+  const [errors, setErrors] = useState<FormErrors>({});
 
 
   const { createProduct } = useAPP();
   const { user } = useAuth();
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: FormErrors = {};
     if (!name) newErrors.name = 'Name is required';
     if (!barcode) newErrors.barcode = 'Invalid barcode';
     if (!price) newErrors.price = 'Price is required';
@@ -35,18 +48,23 @@ const CreateProductPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  useEffect(()=>{
+
+    setBarcode(Bcode || '')
+
+  },[Bcode])
 
   const handleSubmit = async () => {
     if (!validateForm()) return;
 
     const newProduct = {
-      name,
-      type,
-      supplier,
+      name: name,
+      type: type,
+      supplier: supplier,
       sold: solde,
-      price,
-      image,
-      barcode,
+      price: price,
+      image: image,
+      barcode: barcode,
       stocks: [],
       editedBy: [{ warehousemanId: user?.id, at: new Date().toISOString() }],
     };
@@ -60,98 +78,116 @@ const CreateProductPage = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={styles.container}>
-        <TextInput
-          label="Barcode (13 digits)"
-          value={barcode}
-          onChangeText={setBarcode}
-          error={!!errors.barcode}
-          style={styles.input}
-        />
-        <HelperText type="error" visible={!!errors.barcode}>
-          {errors.barcode}
-        </HelperText>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Card style={styles.card}>
+          <Card.Content>
+            <Title style={styles.title}>New Product Entry</Title>
 
+            <TextInput
+              label="Barcode *"
+              value={barcode}
+              onChangeText={setBarcode}
+              error={!!errors.barcode}
+              style={styles.input}
+              mode="outlined"
+              left={<TextInput.Icon icon="barcode" />}
+              keyboardType="number-pad"
+              disabled={!!Bcode}
+              theme={{ colors: { onSurface: 'white', text: 'white' } }}
+            />
+            <HelperText type="error" visible={!!errors.barcode}>
+              {errors.barcode}
+            </HelperText>
 
-        <TextInput
-          label="Product Name"
-          value={name}
-          onChangeText={setName}
-          error={!!errors.name}
-          style={styles.input}
-          mode="outlined"
-        />
-        <HelperText type="error" visible={!!errors.name}>
-          {errors.name}
-        </HelperText>
+            <TextInput
+              label="Product Name *"
+              value={name}
+              onChangeText={setName}
+              error={!!errors.name}
+              style={styles.input}
+              mode="outlined"
+              left={<TextInput.Icon icon="tag" />}
+              theme={{ colors: { onSurface: 'white', text: 'white' } }}
 
-        <TextInput
-          label="Product Type"
-          value={type}
-          onChangeText={setType}
-          error={!!errors.type}
-          style={styles.input}
-          mode="outlined"
-        />
-        <HelperText type="error" visible={!!errors.type}>
-          {errors.type}
-        </HelperText>
+            />
+            <HelperText type="error" visible={!!errors.name}>
+              {errors.name}
+            </HelperText>
 
-        <View style={styles.row}>
-          <TextInput
-            label="Price (€)"
-            value={price}
-            onChangeText={setPrice}
-            keyboardType="numeric"
-            error={!!errors.price}
-            style={[styles.input, { flex: 1, marginRight: 8 }]}
-            mode="outlined"
-          />
-          <TextInput
-            label="Solde Price (€)"
-            value={solde}
-            onChangeText={setSolde}
-            keyboardType="numeric"
-            style={[styles.input, { flex: 1, marginLeft: 8 }]}
-            mode="outlined"
-          />
-        </View>
-        <HelperText type="error" visible={!!errors.price}>
-          {errors.price}
-        </HelperText>
+            <View style={styles.row}>
+              <TextInput
+                label="Category *"
+                value={type}
+                onChangeText={setType}
+                error={!!errors.type}
+                style={[styles.input, styles.rowItem]}
+                mode="outlined"
+                left={<TextInput.Icon icon="format-list-bulleted" />}
+                theme={{ colors: { onSurface: 'white', text: 'white' } }}
 
-        <TextInput
-          label="Supplier"
-          value={supplier}
-          onChangeText={setSupplier}
-          error={!!errors.supplier}
-          style={styles.input}
-          mode="outlined"
-        />
-        <HelperText type="error" visible={!!errors.supplier}>
-          {errors.supplier}
-        </HelperText>
+              />
+              <TextInput
+                label="Supplier *"
+                value={supplier}
+                onChangeText={setSupplier}
+                error={!!errors.supplier}
+                style={[styles.input, styles.rowItem]}
+                mode="outlined"
+                left={<TextInput.Icon icon="truck-delivery" />}
+                theme={{ colors: { onSurface: 'white', text: 'white' } }}
 
-        <TextInput
-          label="Product Image"
-          value={image}
-          onChangeText={setImage}
-          error={!!errors.image}
-          style={styles.input}
-          mode="outlined"
-        />
-        <HelperText type="error" visible={!!errors.image}>
-          {errors.image}
-        </HelperText>
+              />
+            </View>
 
-        {/* <Button mode="contained" onPress={() => }>
-          Scan Barcode
-        </Button> */}
+            <View style={styles.row}>
+              <TextInput
+                label="Price (€) *"
+                value={price}
+                onChangeText={setPrice}
+                error={!!errors.price}
+                style={[styles.input, styles.rowItem]}
+                mode="outlined"
+                keyboardType="decimal-pad"
+                left={<TextInput.Icon icon="currency-eur" />}
+                theme={{ colors: { onSurface: 'white', text: 'white' } }}
 
-        <Button mode="contained" onPress={handleSubmit} style={styles.button}>
-          Create Product
-        </Button>
+              />
+              <TextInput
+                label="Sale Price (€)"
+                value={solde}
+                onChangeText={setSolde}
+                style={[styles.input, styles.rowItem]}
+                mode="outlined"
+                keyboardType="decimal-pad"
+                left={<TextInput.Icon icon="sale" />}
+                theme={{ colors: { onSurface: 'white', text: 'white' } }}
+
+              />
+            </View>
+
+            <TextInput
+              label="Image URL"
+              value={image}
+              onChangeText={setImage}
+              style={styles.input}
+              mode="outlined"
+              left={<TextInput.Icon icon="image" />}
+              theme={{ colors: { onSurface: 'white', text: 'white' } }}
+            />
+
+            <Button
+              mode="contained"
+              onPress={handleSubmit}
+              style={styles.button}
+              labelStyle={styles.buttonLabel}
+              icon="check-circle"
+            >
+              Create Product
+            </Button>
+
+          </Card.Content>
+        </Card>
       </ScrollView>
     </View>
   );
@@ -159,34 +195,54 @@ const CreateProductPage = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+
+},
+  scrollContent: {
     padding: 16,
-    marginTop: 38,
+    minHeight: '100%',
+    color: 'white'
+  },
+  card: {
+    borderRadius: 16,
+    elevation: 4,
+    marginTop:45,
+    backgroundColor:'#1A1A1A',
+  },
+  title: {
+    marginBottom: 24,
+    fontSize: 24,
+    fontWeight: '600',
+    color:'white',
   },
   input: {
-    marginBottom: 8,
+    marginBottom: 16,
+    backgroundColor:'#1A1A1A',
+    color: 'white',
+    outlineColor:'white'
+
   },
   row: {
     flexDirection: 'row',
-    marginBottom: 8,
+    gap: 16,
+  },
+  rowItem: {
+    flex: 1,
   },
   button: {
-    marginTop: 20,
+    marginTop: 24,
+    borderRadius: 8,
     paddingVertical: 8,
-    backgroundColor: '#6200ee',
+    elevation: 2,
   },
-  cameraContainer: {
-    flex: 1,
+  buttonLabel: {
+    fontSize: 16,
+    fontWeight: '600',
+    letterSpacing: 0.5,
   },
-  camera: {
-    flex: 1,
-  },
-  cameraOverlay: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    marginBottom: 20,
+  formError: {
+    textAlign: 'center',
+    marginTop: 16,
   },
 });
 
