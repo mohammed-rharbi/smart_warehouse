@@ -60,11 +60,12 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
     try{
 
         const res = await create(data);
-
         return res
 
     }catch(error){
         console.error("create a product has ben failed:", error);
+    }finally{
+        getProducts()
     }
 
   }
@@ -76,6 +77,10 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
         return res;
     } catch (error) {
         console.error('Error while adding a stock:', error);
+    }finally{
+
+        getProducts()
+
     }
 }
 

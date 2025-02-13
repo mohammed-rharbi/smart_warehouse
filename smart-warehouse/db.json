@@ -113,7 +113,7 @@
       "name": "Nivea men",
       "type": "Beauty ",
       "supplier": "Nivea ",
-      "sold": "85",
+      "solde": "85",
       "price": "80",
       "image": "https://i.pinimg.com/474x/34/d2/9b/34d29b098891f48bdf6ec12603947970.jpg",
       "barcode": "42355182",
@@ -169,15 +169,60 @@
       "name": "book",
       "type": "books",
       "supplier": "dar al kotob",
-      "sold": "40",
+      "solde": "40",
       "price": "30",
       "image": "https://i.pinimg.com/474x/43/75/b7/4375b7d9bf24b88aa53744b417227485.jpg",
       "barcode": "1984",
-      "stocks": [],
+      "stocks": [
+        {
+          "id": 204,
+          "name": "Pariatur Sint et si",
+          "quantity": "4",
+          "localisation": {
+            "city": "marakach",
+            "latitude": "100",
+            "longitude": "1200"
+          }
+        }
+      ],
       "editedBy": [
         {
           "warehousemanId": "1444",
           "at": "2025-02-13T15:29:50.292Z"
+        }
+      ]
+    },
+    {
+      "id": "d3b8",
+      "name": "freshi",
+      "type": "beauty",
+      "supplier": "dove groups",
+      "solde": "240",
+      "price": "200",
+      "image": "https://i.pinimg.com/474x/fe/9f/c5/fe9fc53618e47885bf815cb9a2699b75.jpg",
+      "barcode": "120983745",
+      "stocks": [],
+      "editedBy": [
+        {
+          "warehousemanId": "1444",
+          "at": "2025-02-13T23:12:27.171Z"
+        }
+      ]
+    },
+    {
+      "id": "77f9",
+      "name": "Accusamus ",
+      "type": "Enim",
+      "supplier": "Nihil amet alias su",
+      "sold": "1233",
+      "price": "1200",
+      "image": "https://i.pinimg.com/474x/3e/c8/1e/3ec81e4783227c0d428d425e8983bfca.jpg",
+      "barcode": "12345677",
+      "stocks": [],
+      "editedBy": [
+        {
+          "warehousemanId": "1444",
+          "at": "2025-02-13T23:20:15.621Z"
         }
       ]
     }

@@ -61,7 +61,7 @@ const CreateProductPage = () => {
       name: name,
       type: type,
       supplier: supplier,
-      sold: solde,
+      solde: solde,
       price: price,
       image: image,
       barcode: barcode,

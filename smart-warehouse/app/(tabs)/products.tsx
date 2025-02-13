@@ -21,24 +21,43 @@ const ProductsPage = () => {
 
   const ProductCard = ({ item }: any) => (
     
+    <View style={styles.card}>
     <TouchableOpacity
-      style={styles.card}
+      style={styles.touchableArea}
       onPress={() => router.push(`/ProductDetails?id=${item.id}`)}
     >
       <Image source={{ uri: item.image }} style={styles.image} />
-      
       <View style={styles.details}>
         <Text style={styles.name}>{item.name}</Text>
-        
         <View style={styles.priceRow}>
           <Text style={styles.price}>${item.price}</Text>
           <Text style={styles.solde}>${item.solde}</Text>
-
         </View>
         <InfoRow icon="tag" text={item.type} />
         <InfoRow icon="truck" text={item.supplier} />
       </View>
     </TouchableOpacity>
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity     
+        style={styles.restockButton}
+        onPress={(e) => {
+          e.stopPropagation();
+          console.log('Restock', item.id);
+        }}
+      >
+        <Text style={styles.buttonText}>Restock</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.unloadButton}
+        onPress={(e) => {
+          e.stopPropagation();
+          console.log('Unload', item.id);
+        }}
+      >
+        <Text style={styles.buttonText}>Unload</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
   );
 
   return (
@@ -131,14 +150,14 @@ const styles = StyleSheet.create({
   list: {
     padding: 16,
   },
-  card: {
-    backgroundColor: '#1E1E1E',
-    borderRadius: 10,
-    marginBottom: 16,
-    padding: 12,
-    flexDirection: 'row',
-    elevation: 2,
-  },
+//   card: {
+//     backgroundColor: '#1E1E1E',
+//     borderRadius: 10,
+//     marginBottom: 16,
+//     padding: 12,
+//     flexDirection: 'row',
+//     elevation: 2,
+//   },
   image: {
     width: 100,
     height: 100,
@@ -184,6 +203,45 @@ const styles = StyleSheet.create({
   infoText: {
     color: '#A0A0A0',
     fontSize: 14,
+  },
+  card: {
+    backgroundColor: '#1E1E1E',
+    borderRadius: 10,
+    marginBottom: 16,
+    padding: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  touchableArea: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  buttonContainer: {
+    flexDirection: 'column',
+    gap: 8,
+    marginLeft: 8,
+  },
+  restockButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+    minWidth: 80,
+    alignItems: 'center',
+  },
+  unloadButton: {
+    backgroundColor: '#F44336',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+    minWidth: 80,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '600',
   },
 });
 
