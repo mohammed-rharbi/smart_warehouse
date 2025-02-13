@@ -2,8 +2,8 @@ import React, { useContext, useEffect, createContext, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login } from "@/services/auth";
 import { useRouter } from "expo-router";
-import { Product } from "@/lib/types";
-import { fetchProduct , fetchSinglProduct , create } from "@/services/products";
+import { Product , Stock } from "@/lib/types";
+import { fetchProduct , fetchSinglProduct , create , addStock } from "@/services/products";
 
 type AppContextType = {
 
@@ -12,6 +12,7 @@ type AppContextType = {
   getProducts: ()=> {};
   getOneProducts: (id:string)=> Promise<Product>;
   createProduct: (data:Product)=> Promise<Product>;
+  createProductStock: (data:Stock , id: string)=> Promise<Stock>;
 
 };
 
@@ -63,10 +64,21 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
         return res
 
     }catch(error){
-        console.error("Login failed:", error);
+        console.error("create a product has ben failed:", error);
     }
 
   }
+
+  const createProductStock = async (data: Stock, id: string) => {
+    try {
+        const res = await addStock(data, id);
+        console.log('Stock added successfully:', res);
+        return res;
+    } catch (error) {
+        console.error('Error while adding a stock:', error);
+    }
+}
+
 
   useEffect(()=>{
 
@@ -76,7 +88,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
 
   return (
-    <AppContext.Provider value={{ isLoading , products , getProducts , getOneProducts , createProduct }}>
+    <AppContext.Provider value={{ isLoading , products , getProducts , getOneProducts , createProduct , createProductStock }}>
       {children}
     </AppContext.Provider>
   );
