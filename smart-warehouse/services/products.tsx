@@ -104,5 +104,49 @@ export const addStock = async (newStock: Stock, id: string) => {
 }
 
 
+export const update = async (updatedStock: Product, id: string) => {
+    try {
+
+        const response = await apiClient.patch(`products/${id}`, updatedStock);
+        return response.data;
+
+    } catch (error) {
+        throw new Error('Error while fetching the product');
+    }
+}
 
 
+export const UpdateQuantity = async (type: string, productId: string | undefined, stockId: string) => {
+    try {
+
+      const response = await apiClient.get(`/products/${productId}`);
+      const product = response.data;
+  
+      if (!product || !product.stocks) {
+        throw new Error('Product or stocks not found');
+      }
+  
+
+      const updatedStocks = product.stocks.map((stock: any) => {
+        if (stock.id === stockId) {
+          const newQuantity = type === 'add' 
+            ? stock.quantity + 1 
+            : Math.max(0, stock.quantity - 1); 
+          
+          return { ...stock, quantity: newQuantity };
+        }
+        return stock;
+      });
+  
+
+      const updatedProduct = await apiClient.patch(`/products/${productId}`, {
+        stocks: updatedStocks
+      });
+  
+      return updatedProduct.data;
+      
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+      throw error; 
+    }
+  };
