@@ -13,7 +13,7 @@
         {
           "id": 1999,
           "name": "Gueliz B2",
-          "quantity": 21,
+          "quantity": 9,
           "localisation": {
             "city": "Marrakesh",
             "latitude": 31.628674,
@@ -35,6 +35,28 @@
         {
           "warehousemanId": 1333,
           "at": "2025-02-02"
+        }
+      ],
+      "updatedStocks": [
+        {
+          "id": 1999,
+          "name": "Gueliz B2",
+          "quantity": 22,
+          "localisation": {
+            "city": "Marrakesh",
+            "latitude": 31.628674,
+            "longitude": -7.992047
+          }
+        },
+        {
+          "id": 2991,
+          "name": "Lazari H2",
+          "quantity": 24,
+          "localisation": {
+            "city": "Oujda",
+            "latitude": 34.689404,
+            "longitude": -1.912823
+          }
         }
       ]
     },
@@ -162,15 +184,37 @@
           "warehousemanId": "1333",
           "at": "2025-02-12T22:33:36.465Z"
         }
+      ],
+      "updatedStocks": [
+        {
+          "id": 2759,
+          "name": "Mathew ",
+          "quantity": "32",
+          "localisation": {
+            "city": "Safi",
+            "latitude": "567",
+            "longitude": "765"
+          }
+        },
+        {
+          "id": 8673,
+          "name": "Masira",
+          "quantity": "91",
+          "localisation": {
+            "city": "Safi",
+            "latitude": "1029",
+            "longitude": "1345"
+          }
+        }
       ]
     },
     {
       "id": "a600",
-      "name": "book",
+      "name": "1984 ",
       "type": "books",
       "supplier": "dar al kotob",
-      "solde": "40",
-      "price": "30",
+      "solde": "70",
+      "price": "60",
       "image": "https://i.pinimg.com/474x/43/75/b7/4375b7d9bf24b88aa53744b417227485.jpg",
       "barcode": "1984",
       "stocks": [
@@ -188,7 +232,7 @@
       "editedBy": [
         {
           "warehousemanId": "1444",
-          "at": "2025-02-13T15:29:50.292Z"
+          "at": "2025-02-14T11:11:14.669Z"
         }
       ]
     },
