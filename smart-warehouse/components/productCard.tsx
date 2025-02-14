@@ -1,12 +1,12 @@
 import { router } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet, TextInput } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { MaterialIcons , Feather } from '@expo/vector-icons';
+import { Stock } from "@/lib/types";
 
 
+export const ProductCard = ({ item }: any) => {
 
- export const ProductCard = ({ item }: any) => {
-    
     return (
 
     <View style={styles.card}>
@@ -24,32 +24,11 @@ import { Feather } from '@expo/vector-icons';
         <InfoRow icon="tag" text={item.type} />
         <InfoRow icon="truck" text={item.supplier} />
       </View>
-    </TouchableOpacity>
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity     
-        style={styles.restockButton}
-        onPress={(e) => {
-          e.stopPropagation();
-          console.log('Restock', item.id);
-        }}
-      >
-        <Text style={styles.buttonText}>Restock</Text>
-      </TouchableOpacity>
-      <TouchableOpacity 
-        style={styles.unloadButton}
-        onPress={(e) => {
-          e.stopPropagation();
-          console.log('Unload', item.id);
-        }}
-      >
-        <Text style={styles.buttonText}>Unload</Text>
-      </TouchableOpacity>
-    </View>
+     </TouchableOpacity>
   </View>
 
     )
 };
-
 
 export const InfoRow = ({ icon, text }:any) => (
     <View style={styles.infoRow}>
@@ -119,31 +98,5 @@ const styles = StyleSheet.create({
   touchableArea: {
     flexDirection: 'row',
     flex: 1,
-  },
-  buttonContainer: {
-    flexDirection: 'column',
-    gap: 8,
-    marginLeft: 8,
-  },
-  restockButton: {
-    backgroundColor: '#4CAF50',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 6,
-    minWidth: 80,
-    alignItems: 'center',
-  },
-  unloadButton: {
-    backgroundColor: '#F44336',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 6,
-    minWidth: 80,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
   },
 });
