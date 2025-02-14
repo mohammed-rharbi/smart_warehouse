@@ -52,19 +52,19 @@ export default function TabLayout() {
         }}
       />
        <Tabs.Screen
-        name="products"
+        name="(product)/products"
         options={{
           href:null
         }}
       />
        <Tabs.Screen
-        name="createProduct"
+        name="(product)/createProduct"
         options={{
           href:null
         }}
       />
        <Tabs.Screen
-        name="ProductDetails"
+        name="(product)/ProductDetails"
         options={{
           href:null
         }}
@@ -78,7 +78,14 @@ export default function TabLayout() {
       />
   
       <Tabs.Screen
-        name="addStock"
+        name="(product)/addStock"
+        options={{
+          href:null
+        }}
+      />
+
+      <Tabs.Screen
+        name="(product)/updateProduct"
         options={{
           href:null
         }}

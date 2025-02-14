@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity , ActivityIndicator } from 'react-native';
 import { useAPP } from '@/context/appContext';
 import { Product } from '@/lib/types';
-import { Feather } from '@expo/vector-icons';
+import { Feather , MaterialIcons} from '@expo/vector-icons';
+import Header from '@/components/ui/header';
+import { UpdateQuantity } from '@/services/products';
 
 const ProductDetailsPage = () => {
   const { id } = useLocalSearchParams();
@@ -12,22 +14,39 @@ const ProductDetailsPage = () => {
 
   const { getOneProducts } = useAPP();
 
+  const fetchProduct = async () => {
+    try {
+      const res = await getOneProducts(id as string);
+
+      setProduct(res);
+    } catch (error) {
+      console.error('Failed to fetch product:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
 
-    const fetchProduct = async () => {
-      try {
-        const res = await getOneProducts(id as string);
-
-        setProduct(res);
-      } catch (error) {
-        console.error('Failed to fetch product:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
 
     fetchProduct();
   }, [id]);
+
+  const handleQuantity = async (type: 'add'|'remove' , productId: string , stockId:string )=>{
+
+    try{
+
+      await UpdateQuantity(type , productId , stockId);
+
+
+    }catch(error){
+      console.log(error);
+      
+    }finally{
+      fetchProduct()
+    }
+    
+  }
 
   if (loading) {
     return (
@@ -57,6 +76,11 @@ const ProductDetailsPage = () => {
 
   return (
     <ScrollView style={styles.container}>
+
+        <View style={styles.headerContainer}>
+            <Header title={product.name} route={`/updateProduct?id=${product.id}`}></Header>
+        </View>
+
       <View style={styles.imageContainer}>
         <Image source={{ uri: product.image }} style={styles.productImage} />
       </View>
@@ -98,16 +122,27 @@ const ProductDetailsPage = () => {
                 <View style={styles.stockInfoRow}>
                     <Feather name="database" size={14} color="#4CAF50" />
                     <Text style={styles.stockText}>Quantity: {stock.quantity}</Text>
+                    <View style={styles.buttonContainer}>
+
+                      <TouchableOpacity onPress={()=> handleQuantity('add' , product.id , stock.id)}  >
+                        <MaterialIcons name="add-shopping-cart" size={22} color="#4CAF50" />
+                      </TouchableOpacity>
+
+                      <TouchableOpacity onPress={()=> handleQuantity('remove' , product.id , stock.id)}  >
+                        <MaterialIcons name="remove-shopping-cart" size={22} color="#F44336" />
+                      </TouchableOpacity>
+
+                  </View>
                 </View>
                 <View style={styles.stockInfoRow}>
                     <Feather name="map-pin" size={14} color="#4CAF50" />
                     <Text style={styles.stockText}>{stock.localisation.city}</Text>
                 </View>
+
                 </View>
             ))
             )}
 
-          
                 <View style={{ marginTop: 20, alignItems: 'center' }}>
                 <TouchableOpacity style={styles.addButton} onPress={()=> router.push(`/addStock?id=${product.id}`)} >
                 <Text style={styles.addButtonText}>Add Stock</Text>
@@ -140,9 +175,33 @@ const styles = StyleSheet.create({
     color: '#FF5252',
     fontSize: 18,
   },
+
+  quantity: {
+    fontSize: 14,
+    color: '#4CAF50',
+    fontWeight: '800',
+    marginLeft:5,
+    paddingBlock:5
+
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    gap: 22,
+    marginLeft: 130,
+
+  },
+  iconContainer: {
+    gap: 16,
+  },
+  
+  headerContainer: {
+    paddingTop:35,
+  },
+
   imageContainer: {
     backgroundColor: '#1E1E1E',
-    padding: 16,
+    padding: 8,
   },
   productImage: {
     width: '100%',

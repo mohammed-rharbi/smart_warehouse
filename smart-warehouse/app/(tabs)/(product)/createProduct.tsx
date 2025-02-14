@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, StyleSheet, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, TouchableOpacity , Text } from 'react-native';
 import { Button, TextInput,Card , useTheme , Title, HelperText } from 'react-native-paper';
 import { useAPP } from '@/context/appContext';
 import { useAuth } from '@/context/authContext';
 import { router, useLocalSearchParams } from 'expo-router';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 
 type FormErrors = {
@@ -11,8 +13,8 @@ type FormErrors = {
     type?: string;
     barcode?: string;
     supplier?: string;
-    price?: string;
-    solde?: string;
+    price?: number;
+    solde?: number;
     image?: string;
   };
   
@@ -22,17 +24,15 @@ const CreateProductPage = () => {
 
   const {Bcode} = useLocalSearchParams()
 
-  const theme = useTheme();
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [barcode, setBarcode] = useState(Bcode);
   const [supplier, setSupplier] = useState('');
   const [price, setPrice] = useState('');
   const [solde, setSolde] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
 
   const [errors, setErrors] = useState<FormErrors>({});
-
 
   const { createProduct } = useAPP();
   const { user } = useAuth();
@@ -42,6 +42,7 @@ const CreateProductPage = () => {
     if (!name) newErrors.name = 'Name is required';
     if (!barcode) newErrors.barcode = 'Invalid barcode';
     if (!price) newErrors.price = 'Price is required';
+    if (!solde) newErrors.solde = 'Price is required';
     if (!supplier) newErrors.supplier = 'Supplier is required';
     if (!type) newErrors.type = 'Type is required';
     setErrors(newErrors);
@@ -96,6 +97,7 @@ const CreateProductPage = () => {
               disabled={!!Bcode}
               theme={{ colors: { onSurface: 'white', text: 'white' } }}
             />
+      
             <HelperText type="error" visible={!!errors.barcode}>
               {errors.barcode}
             </HelperText>
@@ -149,6 +151,7 @@ const CreateProductPage = () => {
                 style={[styles.input, styles.rowItem]}
                 mode="outlined"
                 keyboardType="decimal-pad"
+            
                 left={<TextInput.Icon icon="currency-eur" />}
                 theme={{ colors: { onSurface: 'white', text: 'white' } }}
 
@@ -188,6 +191,15 @@ const CreateProductPage = () => {
 
           </Card.Content>
         </Card>
+
+        
+      <View style={styles.scan}>
+            <TouchableOpacity style={styles.actionCard} onPress={()=> router.push('/barcodeScanner')}>
+            <MaterialCommunityIcons name="barcode-scan" size={32} color="#9C27B0" />
+        </TouchableOpacity>
+        <Text style={styles.actionText}>Scan BardCode</Text>
+      </View>
+   
       </ScrollView>
     </View>
   );
@@ -220,7 +232,17 @@ const styles = StyleSheet.create({
     backgroundColor:'#1A1A1A',
     color: 'white',
     outlineColor:'white'
-
+  },
+  buttonContainer: {
+    flexDirection: 'column',
+    gap: 8,
+    marginLeft: 8,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    gap: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',
@@ -234,6 +256,27 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 8,
     elevation: 2,
+  },
+
+  scan: {
+    flex: 1,
+    alignItems:'center',
+    marginTop:20
+
+  },
+
+  actionCard: {
+
+    backgroundColor: '#2D2D2D',
+    padding: 10,
+    borderRadius: 15,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  actionText: {
+    color: '#fff',
+    marginTop: 5,
+    fontWeight: '600',
   },
   buttonLabel: {
     fontSize: 16,

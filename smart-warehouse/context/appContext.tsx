@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login } from "@/services/auth";
 import { useRouter } from "expo-router";
 import { Product , Stock } from "@/lib/types";
-import { fetchProduct , fetchSinglProduct , create , addStock } from "@/services/products";
+import { fetchProduct , fetchSinglProduct , create , update , addStock } from "@/services/products";
 
 type AppContextType = {
 
@@ -13,6 +13,8 @@ type AppContextType = {
   getOneProducts: (id:string)=> Promise<Product>;
   createProduct: (data:Product)=> Promise<Product>;
   createProductStock: (data:Stock , id: string)=> Promise<Stock>;
+  updateProduct: (data:Product , id: string)=> Promise<Product>;
+
 
 };
 
@@ -85,6 +87,20 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 }
 
 
+const updateProduct = async (data: Product, id: string) => {
+    try {
+        const res = await update(data, id);
+        console.log('Stock updated successfully:', res);
+        return res;
+    } catch (error) {
+        console.error('Error while updating a product:', error);
+    }finally{
+
+        getProducts()
+
+    }
+}
+
   useEffect(()=>{
 
     getProducts()
@@ -93,7 +109,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
 
   return (
-    <AppContext.Provider value={{ isLoading , products , getProducts , getOneProducts , createProduct , createProductStock }}>
+    <AppContext.Provider value={{ isLoading , products , getProducts , getOneProducts , createProduct , createProductStock, updateProduct }}>
       {children}
     </AppContext.Provider>
   );
