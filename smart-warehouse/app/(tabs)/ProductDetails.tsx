@@ -9,7 +9,6 @@ const ProductDetailsPage = () => {
   const { id } = useLocalSearchParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
-  const [stockColor ,setStockColor ] = useState('blue')
 
   const { getOneProducts } = useAPP();
 
