@@ -22,8 +22,8 @@ export interface Product{
     name:string,
     type:string,
     barcode:string,
-    price:string,
-    solde:string,
+    price:number,
+    solde:number,
     supplier:string,
     image:string,
     stocks:[
@@ -45,7 +45,7 @@ export interface Stock{
 
             id:number,
             name:string,
-            quantity:string,
+            quantity:number,
             localisation:{
                 city:string ,
                 latitude: string ,
