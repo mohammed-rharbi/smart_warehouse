@@ -3,6 +3,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '@/context/authContext';
 import { router } from 'expo-router';
+import Header from '@/components/ui/header';
 
 
 export default function ProfileScreen() {
@@ -23,16 +24,7 @@ export default function ProfileScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
 
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={()=> router.back()}>
-            <Ionicons name="arrow-back" size={24} color="#fff" />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Profile</Text>
-          <TouchableOpacity style={styles.editButton}>
-            <MaterialCommunityIcons name="pencil" size={24} color="#4CAF50" />
-          </TouchableOpacity>
-        </View>
-
+        <Header title={'profile'} route={`/`}></Header>
 
         <View style={styles.profileSection}>
           <Image 
@@ -117,23 +109,6 @@ const styles = StyleSheet.create({
   scrollContainer: {
     padding: 20,
     
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  backButton: {
-    padding: 8,
-  },
-  headerTitle: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  editButton: {
-    padding: 8,
   },
   profileSection: {
     alignItems: 'center',
