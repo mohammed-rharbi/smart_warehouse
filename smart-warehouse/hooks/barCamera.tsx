@@ -11,26 +11,24 @@ export default function useScanner() {
 
     const handleBarCodeScanned = async ({ type, data }: { type: string; data: string }) => {
         try {
-            // Prevent multiple scans
+
             if (scanned) return;
             setScanned(true);
 
             const product = await getProductByBarcode(data);
             
             if (product) {
-                // Existing product found - navigate to details
+
                 router.push(`/ProductDetails?id=${product.id}`);
             } else {
-                // New product - navigate to create page with scanned barcode
+
                 router.push(`/createProduct?Bcode=${data}`);
             }
             
-            // Optional: Reset scanning after timeout if you stay on same page
-            // setTimeout(() => setScanned(false), 2000);
 
         } catch (err) {
             console.log(err);
-            // Reset scan on error
+
             setScanned(false);
         }
     };
