@@ -6,6 +6,7 @@ import { Product } from '@/lib/types';
 import { Feather , MaterialIcons} from '@expo/vector-icons';
 import Header from '@/components/ui/header';
 import { UpdateQuantity } from '@/services/products';
+import ExportPDFButton from '@/components/pdf';
 
 const ProductDetailsPage = () => {
   const { id } = useLocalSearchParams();
@@ -146,8 +147,13 @@ const ProductDetailsPage = () => {
                 <View style={{ marginTop: 20, alignItems: 'center' }}>
                 <TouchableOpacity style={styles.addButton} onPress={()=> router.push(`/addStock?id=${product.id}`)} >
                 <Text style={styles.addButtonText}>Add Stock</Text>
-                </TouchableOpacity>               
+                </TouchableOpacity>     
+          
+                <ExportPDFButton product={product} buttonStyle='icon' />              
                 </View>
+
+
+                
 
       </View>
     </ScrollView>
