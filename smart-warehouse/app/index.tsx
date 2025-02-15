@@ -1,7 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { Link, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Animated } from 'react-native';
-import LottieView from 'lottie-react-native';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 export default function LandingPage() {
@@ -42,13 +41,13 @@ export default function LandingPage() {
             <Text style={styles.buttonText}>Get Started</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
+          {/* <TouchableOpacity 
             style={styles.secondaryButton}
             onPress={() => router.push('/register')}
           >
             <Text style={styles.secondaryButtonText}>Create Account</Text>
             <AntDesign name="arrowright" size={20} color="#fff" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </LinearGradient>

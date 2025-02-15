@@ -85,19 +85,20 @@ const CreateProductPage = () => {
           <Card.Content>
             <Title style={styles.title}>New Product Entry</Title>
 
+            <View style={styles.barcodeContainer}>
             <TextInput
               label="Barcode *"
               value={barcode}
               onChangeText={setBarcode}
               error={!!errors.barcode}
-              style={styles.input}
-              mode="outlined"
+              style={styles.barcodeInput}
               left={<TextInput.Icon icon="barcode" />}
-              keyboardType="number-pad"
-              disabled={!!Bcode}
               theme={{ colors: { onSurface: 'white', text: 'white' } }}
             />
-      
+            <TouchableOpacity style={styles.actionCard} onPress={()=> router.push('/barcodeScanner')}>
+            <MaterialCommunityIcons name="barcode-scan" size={32} color="#9C27B0" />
+            </TouchableOpacity>
+           </View>
             <HelperText type="error" visible={!!errors.barcode}>
               {errors.barcode}
             </HelperText>
@@ -190,16 +191,7 @@ const CreateProductPage = () => {
             </Button>
 
           </Card.Content>
-        </Card>
-
-        
-      <View style={styles.scan}>
-            <TouchableOpacity style={styles.actionCard} onPress={()=> router.push('/barcodeScanner')}>
-            <MaterialCommunityIcons name="barcode-scan" size={32} color="#9C27B0" />
-        </TouchableOpacity>
-        <Text style={styles.actionText}>Scan BardCode</Text>
-      </View>
-   
+        </Card> 
       </ScrollView>
     </View>
   );
@@ -233,6 +225,18 @@ const styles = StyleSheet.create({
     color: 'white',
     outlineColor:'white'
   },
+  barcodeInput: {
+    marginBottom: 3,
+    width:'78%',
+    backgroundColor:'#1A1A1A',
+    color: 'white',
+    outlineColor:'white'
+  },
+
+  barcodeContainer: {
+    flexDirection: 'row',
+    gap:12,
+  },
   buttonContainer: {
     flexDirection: 'column',
     gap: 8,
@@ -262,7 +266,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems:'center',
     marginTop:20
-
   },
 
   actionCard: {
@@ -270,8 +273,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#2D2D2D',
     padding: 10,
     borderRadius: 15,
+    marginBlock:3,
     alignItems: 'center',
-    marginBottom: 15,
   },
   actionText: {
     color: '#fff',
