@@ -1,0 +1,38 @@
+# Node.js dependencies
+node_modules
+*.log
+
+# Environment variables
+.env
+
+# Docker-related files
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Expo files
+.expo
+.expo-shared
+
+# Build files
+/build
+/dist
+
+# IDE and editor files
+.vscode
+.idea
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Cache directories
+.cache
+.npm
+.yarn/cache
