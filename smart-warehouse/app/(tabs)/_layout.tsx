@@ -90,6 +90,15 @@ export default function TabLayout() {
           href:null
         }}
       />
-    </Tabs>
+
+      <Tabs.Screen
+        name="(dashboard)/statistics"
+        options={{
+          href:null
+        }}
+      />
+
+      
+      </Tabs>
   );
 }
