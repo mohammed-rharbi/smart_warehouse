@@ -15,9 +15,7 @@ type FormErrors = {
     image?: string;
   };
   
-
 const CreateProductPage = () => {
-
 
   const {id} = useLocalSearchParams()
 
