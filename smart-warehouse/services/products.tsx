@@ -17,7 +17,7 @@ export const fetchProduct = async () => {
             throw new Error('no products ben found');
         }
     } catch (error) { 
-        throw new Error(' error while fetching the products');
+        throw new Error('error while fetching the products');
     }
 };
 
@@ -35,7 +35,7 @@ export const fetchSinglProduct = async (id: string) => {
             throw new Error('no products ben found');
         }
     } catch (error) { 
-        throw new Error(' error while fetching the products');
+        throw new Error('error while fetching the product');
     }
 };  
 
@@ -56,7 +56,7 @@ export const create = async (data : Product)=>{
         }
 
     }catch(error){
-        throw new Error(' error while creating the product');
+        throw new Error('error while creating the product');
     }
 }
 
@@ -77,7 +77,7 @@ export const getProductByBarcode = async (code : string)=>{
         }
 
     }catch(error){
-        throw new Error(' error while fetching the product');
+        throw new Error('error while fetching the product');
     }
 }
 
@@ -116,6 +116,18 @@ export const update = async (updatedStock: Product, id: string) => {
 }
 
 
+export const remove = async (id: string) => {
+    try {
+
+        await apiClient.delete(`/products/${id}`);
+
+    } catch (error) {
+        throw new Error('Error while deleting the product');
+    }
+}
+
+
+
 export const UpdateQuantity = async (type: string, productId: string | undefined, stockId: string) => {
     try {
 
@@ -127,7 +139,7 @@ export const UpdateQuantity = async (type: string, productId: string | undefined
       }
   
 
-      const updatedStocks = product.stocks.map((stock: any) => {
+      const stocks = product.stocks.map((stock: any) => {
         if (stock.id === stockId) {
           const newQuantity = type === 'add' 
             ? stock.quantity + 1 
@@ -140,13 +152,12 @@ export const UpdateQuantity = async (type: string, productId: string | undefined
   
 
       const updatedProduct = await apiClient.patch(`/products/${productId}`, {
-        stocks: updatedStocks
+        stocks: stocks
       });
   
       return updatedProduct.data;
       
     } catch (error) {
-      console.error('Error updating quantity:', error);
-      throw error; 
+        throw new Error('Error updating quantity');
     }
   };

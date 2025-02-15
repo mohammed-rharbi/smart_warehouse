@@ -3,11 +3,13 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { useAuth } from '@/context/authContext';
 import { router } from 'expo-router';
+import { useAPP } from '@/context/appContext';
 
 export default function HomeScreen() {
 
 
     const {user} = useAuth()
+    const {totalProducts} = useAPP()
 
   return (
 
@@ -28,7 +30,7 @@ export default function HomeScreen() {
         <View style={styles.statsRow}>
           <View style={[styles.statCard, styles.card1]}>
             <MaterialCommunityIcons name="package-variant" size={32} color="#fff" />
-            <Text style={styles.statValue}>2,345</Text>
+            <Text style={styles.statValue}>{totalProducts}</Text>
             <Text style={styles.statLabel}>Total Items</Text>
           </View>
           
@@ -52,7 +54,7 @@ export default function HomeScreen() {
             <Text style={styles.actionText}>Manage Products</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionCard}>
+          <TouchableOpacity style={styles.actionCard} onPress={()=> router.push('/statistics')} >
             <MaterialCommunityIcons name="chart-bar" size={32} color="#FF9800" />
             <Text style={styles.actionText}>Analytics</Text>
           </TouchableOpacity>

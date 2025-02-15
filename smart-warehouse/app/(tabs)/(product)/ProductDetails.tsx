@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity , ActivityIndicator } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity , ActivityIndicator, Alert } from 'react-native';
 import { useAPP } from '@/context/appContext';
 import { Product } from '@/lib/types';
 import { Feather , MaterialIcons} from '@expo/vector-icons';
@@ -13,7 +13,7 @@ const ProductDetailsPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const { getOneProducts } = useAPP();
+  const { getOneProducts , deleteProduct } = useAPP();
 
   const fetchProduct = async () => {
     try {
@@ -74,6 +74,25 @@ const ProductDetailsPage = () => {
       return 'green';
     }
   };
+
+  const handleDelete = async (id:string) => {
+    Alert.alert(
+      'Confirm Deletion',
+      'Are you sure you want to delete this product?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Delete', style: 'destructive', onPress: async () => {
+            try {
+              await deleteProduct(id);
+              router.push('/(tabs)/(product)/products');
+            } catch (error) {
+              console.error('Failed to delete product:', error);
+            }
+          }
+        }
+      ]
+    );
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -149,11 +168,13 @@ const ProductDetailsPage = () => {
                 <Text style={styles.addButtonText}>Add Stock</Text>
                 </TouchableOpacity>     
           
-                <ExportPDFButton product={product} buttonStyle='icon' />              
-                </View>
+                <ExportPDFButton product={product} buttonStyle='icon' />        
 
-
+                <TouchableOpacity style={styles.deleteButton} onPress={()=> handleDelete(product.id)} >
+                <Text style={styles.addButtonText}>Delete the product</Text>
+                </TouchableOpacity>     
                 
+                </View>
 
       </View>
     </ScrollView>
@@ -301,7 +322,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
-  }
+  },
+  deleteButton: {
+    backgroundColor: 'red',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    marginTop: 10,
+  },
 });
 
 export default ProductDetailsPage;
