@@ -262,7 +262,18 @@
       "price": "1200",
       "image": "https://i.pinimg.com/474x/3e/c8/1e/3ec81e4783227c0d428d425e8983bfca.jpg",
       "barcode": "12345677",
-      "stocks": [],
+      "stocks": [
+        {
+          "id": 4984,
+          "name": "boutic slami",
+          "quantity": "12",
+          "localisation": {
+            "city": "safi",
+            "latitude": "1112",
+            "longitude": "1111"
+          }
+        }
+      ],
       "editedBy": [
         {
           "warehousemanId": "1444",
