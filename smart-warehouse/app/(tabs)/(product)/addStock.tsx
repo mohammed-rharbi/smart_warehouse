@@ -49,7 +49,7 @@ const AddProductStock = () => {
 
     const newProductStock = {
 
-      id: Math.floor(Math.random() * 10000),
+      id: JSON.stringify(Math.floor(Math.random() * 10000)),
       name: name,
       quantity: quantity,
       localisation: {

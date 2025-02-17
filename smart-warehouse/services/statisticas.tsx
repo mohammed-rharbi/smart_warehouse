@@ -14,55 +14,58 @@ export const getStatistics = async () => {
 
 
 export const updateMostAddedProducts = async (productId: string, productName: string) => {
+console.log(productId);
 
 
-    try {
+    // try {
 
-      const statsResponse = await apiClient.get(`/statistics`);
+    //   const statsResponse = await apiClient.get(`/statistics`);
 
-      if (!statsResponse) {
-        throw new Error(`Failed to fetch statistics`);
-      }
+    //   console.log(statsResponse);
+      
+    //   if (!statsResponse) {
+    //     throw new Error(`Failed to fetch statistics`);
+    //   }
 
-      const statistics = await statsResponse.data;
+    //   const statistics = await statsResponse.data;
   
-      if (!statistics || typeof statistics !== 'object') {
-        throw new Error("Invalid statistics data");
-      }
+    //   if (!statistics || typeof statistics !== 'object') {
+    //     throw new Error("Invalid statistics data");
+    //   }
   
-      if (!Array.isArray(statistics.mostAddedProducts)) {
-        statistics.mostAddedProducts = [];
-      }
+    //   if (!Array.isArray(statistics.mostAddedProducts)) {
+    //     statistics.mostAddedProducts = [];
+    //   }
   
-      const currentTime = new Date().toISOString();  
+    //   const currentTime = new Date().toISOString();  
 
-      const existingProductIndex = statistics.mostAddedProducts.findIndex(
-        (item: any) => item.productId === productId
-      );
+    //   const existingProductIndex = statistics.mostAddedProducts.findIndex(
+    //     (item: any) => item.productId === productId
+    //   );
   
-      if (existingProductIndex !== -1) {
-        statistics.mostAddedProducts[existingProductIndex].addedCount += 1;
-        statistics.mostAddedProducts[existingProductIndex].lastAddedAt = currentTime;
-      } else {
-        statistics.mostAddedProducts.push({
-          productId,
-          productName,
-          addedCount: 1,
-          lastAddedAt: currentTime
-        });
-      }
+    //   if (existingProductIndex !== -1) {
+    //     statistics.mostAddedProducts[existingProductIndex].addedCount += 1;
+    //     statistics.mostAddedProducts[existingProductIndex].lastAddedAt = currentTime;
+    //   } else {
+    //     statistics.mostAddedProducts.push({
+    //       productId,
+    //       productName,
+    //       addedCount: 1,
+    //       lastAddedAt: currentTime
+    //     });
+    //   }
   
-      statistics.mostAddedProducts.sort((a: any, b: any) => b.addedCount - a.addedCount);
+    //   statistics.mostAddedProducts.sort((a: any, b: any) => b.addedCount - a.addedCount);
   
-      statistics.mostAddedProducts = statistics.mostAddedProducts.slice(0, 10);
+    //   statistics.mostAddedProducts = statistics.mostAddedProducts.slice(0, 10);
   
-      const updateStatsResponse = await apiClient.put(`/statistics`, {statistics});
+    //   const updateStatsResponse = await apiClient.patch(`/statistics`, {statistics});
   
-      return updateStatsResponse.data;
-    } catch (error) {
-      console.error("Error updating most added products:", error);
-      throw error;
-    }
+    //   return updateStatsResponse.data;
+    // } catch (error) {
+    //   console.error("Error updating most added products:", error);
+    //   throw error;
+    // }
   };
 
 
