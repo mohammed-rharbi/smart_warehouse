@@ -69,29 +69,6 @@ const StatisticsScreen = () => {
         </View>
       </ScrollView>
 
-      <View style={styles.chartContainer}>
-        <Text style={styles.sectionTitle}>Stock Levels</Text>
-        <LineChart
-          data={{
-            labels: stats.mostAddedProducts.map(p => p.productName),
-            datasets: [{
-              data: stats.mostAddedProducts.map(p => p.addedCount),
-            }]
-          }}
-          width={Dimensions.get('window').width - 32}
-          height={220}
-          chartConfig={{
-            backgroundColor: '#ffffff',
-            backgroundGradientFrom: '#ffffff',
-            backgroundGradientTo: '#ffffff',
-            decimalPlaces: 0,
-            color: (opacity = 1) => `rgba(33, 150, 243, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          }}
-          bezier
-          style={styles.chart}
-        />
-      </View>
 
       <View style={styles.listContainer}>
         <Text style={styles.sectionTitle}>Most Added Products</Text>

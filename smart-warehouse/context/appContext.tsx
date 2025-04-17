@@ -65,12 +65,10 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
     try{
 
-        const res = await create(data);
+        const res = await create(data); 
         
-        await updateMostAddedProducts(data.id, data.name);
-        await updateTotalProducts();
-        await updateTotalStockValue();
-        await updateOutOfStock()
+        await updateMostAddedProducts(res.id, res.name);
+      
         return res
 
     }catch(error){
@@ -101,6 +99,7 @@ const updateProduct = async (data: Product, id: string) => {
     try {
         const res = await update(data, id);
         console.log('Stock updated successfully:', res);
+        await updateMostAddedProducts(res.id, res.name);
         return res;
     } catch (error) {
         console.error('Error while updating a product:', error);
@@ -117,6 +116,21 @@ const deleteProduct = async (id:string)=>{
 
    await remove(id);
     
+  }catch(error) {
+    console.error('Error while updating a product:', error);
+  }finally{
+      getProducts()
+
+  }
+}
+
+
+const outOfStocks = async ()=>{
+  
+  try {
+
+    const prod = await fetchProduct();
+
   }catch(error) {
     console.error('Error while updating a product:', error);
   }finally{
